@@ -1,0 +1,23 @@
+<title>Immunization Project</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="/static/d3.min.js"></script>
+
+<h1>Immunization Class Project</h1>
+<p>This app shows the success of vaccination programs in different countries.</p>
+
+<ul>
+<li><a href="/table/disagrees" target="_blank">/table/disagrees</a>
+<li><a href="/plot1" target="_blank">/plot1</a>
+</ul>
+
+<div id="example"></div>
+
+<script>
+console.log('running')
+
+d3.json('/records').then(function(records){
+    var attach = d3.select('#example');
+    attach.append('p').text(`${records.length} records added`);
+})
+
+</script>
