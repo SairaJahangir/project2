@@ -1,0 +1,58 @@
+<title>Immunization Project: Disagreement</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="/static/d3.min.js"></script>
+<script src="/static/plotly-latest.min.js"></script>
+<script src="/static/underscore-min.js"></script>
+<script src="/static/plot.js"></script>
+<style>
+#controls {
+	margin-bottom: 8px;
+}
+label {
+	font-size: 80%;
+}
+select {
+	font-size: 105%;
+	margin-right: 10px;
+}
+p, li {
+    max-width: 8in;
+}
+</style>
+
+<h1>Disagreement</h1>
+
+<p>Despite the historical success of vaccination, not everyone is confident
+in its safety or believes it should be universally required. This gap
+between medical effectiveness and social acceptance creates a health care
+problem.</p>
+
+<p>In the chart below, showing data from 2015, note the large number of
+Western economies--historically the first to experience the benefits of
+vaccination, and the most able to afford the practice--with relatively large
+fractions of the population disagreeing that vaccines are safe and effective.</p>
+
+<div id="controls">
+	<label for="sortby">Sort:</label>
+	<select id="sortby" onchange="plotDisagrees(this.value)">
+		<option value="alpha">Alphabetically</option>
+		<option value="ascend">Disagrees Low to High</option>
+		<option value="descend">Disagrees High to Low</option>
+		<option value="ascendcases">Cases Low to High</option>
+		<option value="descendcases">Cases High to Low</option>
+	</select>
+	<label for="year">Year:</label>
+	<select id="year" disabled>
+		<option>2015</option>
+	</select>
+</div>
+
+<div id="disagrees"></div>
+
+<script>
+load_disagrees(function() {
+	load_coverage(function() {
+		plotDisagrees();
+	});
+});
+</script>

@@ -1,0 +1,61 @@
+<title>Immunization Project: Coverage</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="/static/d3.min.js"></script>
+<script src="/static/plotly-latest.min.js"></script>
+<script src="/static/underscore-min.js"></script>
+<script src="/static/plot.js"></script>
+<style>
+#controls {
+	margin-bottom: 8px;
+}
+label {
+	font-size: 80%;
+}
+select {
+	font-size: 105%;
+	margin-right: 10px;
+}
+</style>
+
+<h1>Coverage</h1>
+
+<div id="controls">
+	<label for="sortby">Sort:</label>
+	<select id="sortby" onchange="updateCoverageSortby(this.value)">
+		<option value="alpha">Alphabetically</option>
+		<option value="ascend">Vaccine Percent Low to High</option>
+		<option value="descend">Vaccine Percent High to Low</option>
+	</select>
+	<label for="year">Year:</label>
+	<select id="year" onchange="updateCoverageYear(this.value)">
+	</select>
+</div>
+
+<div id="coverage"></div>
+
+<script>
+// load the chart when this page loads
+
+load_coverage(function(){
+
+	// compute list of all possible years
+	var years = _.map(coverage, item => +item.Year);
+	years = _.uniq(years);
+	years = _.sortBy(years, y => y);
+
+	// compute which is the latest
+	var latestYear = _.max(years);
+
+	// add year options to dropdown select
+	d3.select('#year')
+	  .selectAll('option')
+	  .data(years)
+	  .enter()
+	  .append('option')
+		.attr('value', d => d)
+		.property('selected', d => d == latestYear)
+		.text(d => d);
+
+	plotCoverage('alpha', latestYear);
+});
+</script>

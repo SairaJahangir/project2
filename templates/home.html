@@ -1,0 +1,66 @@
+<title>Immunization Project</title>
+<link rel="stylesheet" type="text/css" href="/static/style.css">
+<script src="/static/d3.min.js"></script>
+<script src="/static/plotly-latest.min.js"></script>
+<script src="/static/underscore-min.js"></script>
+<script src="/static/plot.js"></script>
+<style>
+p, li {
+    max-width: 10in;
+}
+</style>
+
+<h1>Immunization Project</h1>
+
+<p>
+<img src="/static/mainimage.jpg"
+     title="vaccination image from UNICEF Ethiopia"
+     style="float: right; max-width: 35%; margin-left: 8px; border-radius: 8px;">
+<!-- image courtesy UNICEF Ethiopia
+source https://www.flickr.com/photos/unicefethiopia/27124303631/in/photostream/
+license Attribution-NonCommercial-NoDerivs 2.0 Generic (CC BY-NC-ND 2.0)
+-->
+This app shows the success of programs using the
+<a href="https://en.wikipedia.org/wiki/Measles_vaccine">measles vaccine</a>
+in different countries, across different years. It is based on four related
+datasets from PROVIDE SOURCE HERE, described below.</p>
+
+<p><i>NOTE: </i> Given the large amount of data presented, this app best viewed
+on a desktop computer with a large monitor, and a browser expanded to occupy
+most or all of the screen.</p>
+
+
+
+<p>Datasets to explore:</p>
+
+<ul>
+    <li><a href="/deaths" target="_blank">Deaths</a> - deaths caused by
+        vaccine-preventable diseases, varied by country and year. (Original
+        dataset includes other diseases, but here limited to measles.)</li>
+    <li><a href="/coverage" target="_blank">Coverage</a> - measles vaccine
+        coverage varied by country and time. Also includes total population of
+        each country as a demographic comparison.</li>
+    <li><a href="/children" target="_blank">Children</a> - share of young
+        children (12-23 months) vaccinated by country and year.</li>
+    <li><a href="/disagrees" target="_blank">Disagrees</a> - 2015 evaluation
+        of share of population that disagrees vaccines are safe. Varied by
+        country.</li>
+</ul>
+
+<p>The following plot shows the distribution of the available data to help guide your
+   exploration.</p>
+
+<div id="datapoints"></div>
+
+<script>
+    console.log('starting homepage')
+    load_deaths(function(){
+        load_coverage(function() {
+            load_children(function() {
+                load_disagrees(function() {
+                    plotDatapoints();
+                })
+            })
+        })
+    });
+</script>
